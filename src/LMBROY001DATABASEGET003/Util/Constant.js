@@ -10,7 +10,10 @@ exports.ESTADO_SERVICE_ERROR = {
 exports.MENSAJE_SERVICE = {
     ERROR_GENERAL: 'Se presento un problema.',
     SUCCESS_LISTA: 'Busqueda realizada con Exito.',
-    SUCCESS_LISTA_SIN_REGISTRO: 'No se encontraron registros.'
+    NOT_FOUND_DATA: 'No se encontraron registros.',
+    NOT_FOUND_RESOURCE: 'Modelo no encontrado en la Base de datos',
+    PARAM_INCORRECTOS: 'Parámetros incorrectos',
+    ERROR_CNN: 'Error de conexion',
 }
 
 exports.SWAPI_URL = {
@@ -28,6 +31,10 @@ exports.SWAPI_RESOURCE = {
 
 exports.SWAPI_VARIABLE = {
     RESULTS: "results",
+}
+
+exports.REPLACE_VARIABLE = {
+    TABLE: "[TABLE]",
 }
 
 exports.CHARACTERS = {

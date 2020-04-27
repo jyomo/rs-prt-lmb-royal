@@ -20,7 +20,7 @@ module.exports.get = async (event, context, callback) => {
     context.succeed(callback(null, retorna));
   };
 
-  await utilDB.getDataStarWars(FilterRequest.request, getReturn);
+  await utilDB.getDataTable(FilterRequest.request, getReturn);
 
 };
 

@@ -47,15 +47,14 @@ functions:
             origin: '*'
             headers:
               - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Access-Control-Allow-Origin
-              - Access-Control-Allow-Credentials
-              - User
-            allowCredentials: false
+              # - X-Amz-Date
+              # - Authorization
+              # - X-Api-Key
+              # - X-Amz-Security-Token
+              # - X-Amz-User-Agent
+              # - Access-Control-Allow-Origin
+              # - Access-Control-Allow-Credentials
+              # - User
           private: true
           request:
             passThrough: WHEN_NO_TEMPLATES
@@ -72,4 +71,45 @@ functions:
                         "id": "$input.params('id')",
                         "search": "$input.params('search')"
                     }
+
+
+# 02. obtener modelo personalizado de la BD
+  getDataCustom:
+    handler: src/LMBROY001DATABASEGET003/handlerGet.get
+    name: LMBROY001DATABASEGET003
+    description: Lambda de prueba.
+    package:
+      include:
+        - 'src/LMBROY001DATABASEGET003/**'
+    events:
+      - http:
+          path: custommodel
+          method: get
+          integration: lambda
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+              - User
+          private: true
+          request:
+            passThrough: WHEN_NO_TEMPLATES
+            parameters:
+              querystrings:
+                resource: false
+            template:
+              application/json: |-
+                    #set($inputRoot = $input.path('$'))
+                    {
+                        "resource": "$input.params('resource')"
+                    }
+                    
+                    
 # 03. xxx     
