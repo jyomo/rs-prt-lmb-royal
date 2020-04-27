@@ -10,7 +10,8 @@ exports.ESTADO_SERVICE_ERROR = {
 exports.MENSAJE_SERVICE = {
     ERROR_GENERAL: 'Se presento un problema.',
     SUCCESS_LISTA: 'Busqueda realizada con Exito.',
-    SUCCESS_LISTA_SIN_REGISTRO: 'No se encontraron registros.'
+    NOT_FOUND: 'No se encontraron registros.',
+    PARAM_INCORRECTOS: 'Parámetros incorrectos',
 }
 
 exports.SWAPI_URL = {

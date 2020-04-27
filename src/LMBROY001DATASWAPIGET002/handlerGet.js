@@ -15,16 +15,9 @@ module.exports.get = async (event, context, callback) => {
     if (err) {
       retorna = { tipo: constant.ESTADO_SERVICE_ERROR.TIPO, mensaje: constant.MENSAJE_SERVICE.ERROR_GENERAL, data: null };
     } else {
-      // console.log("response", response);
-      if (!isNullOrEmpty(response)) {
-        retorna = { tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO, mensaje: constant.MENSAJE_SERVICE.SUCCESS_LISTA, data: response };
-      } else {
-        retorna = { tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO, mensaje: constant.MENSAJE_SERVICE.SUCCESS_LISTA_SIN_REGISTRO, data: null };
-      }
+      retorna = { tipo: response.tipo, mensaje: response.mensaje, response: response.data };
     }
-
     context.succeed(callback(null, retorna));
-
   };
 
   await utilDB.getDataStarWars(FilterRequest.request, getReturn);

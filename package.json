@@ -14,5 +14,7 @@
     "mysql": "^2.15.0",
     "request": "^2.88.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "lambda-local": "^1.7.2"
+  }
 }

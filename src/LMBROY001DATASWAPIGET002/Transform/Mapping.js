@@ -101,7 +101,7 @@ module.exports = {
                     .set("edited", "editado")
                     .set("url", "url");
                 break;
-                
+
             case constant.SWAPI_RESOURCE.VEHICLES:
                 return new Map()
                     .set("name", "nombre")
@@ -120,6 +120,16 @@ module.exports = {
                     .set("created", "creado")
                     .set("edited", "editado")
                     .set("url", "url");
+                break;
+
+            case constant.SWAPI_URL.API_BASE:
+                return new Map()
+                    .set("people", "personas")
+                    .set("planets", "planetas")
+                    .set("films", "peliculas")
+                    .set("species", "especies")
+                    .set("vehicles", "vehiculos")
+                    .set("starships", "naves_espaciales")
                 break;
 
             default:

@@ -5,20 +5,38 @@ var Request = require("request");
 
 module.exports = {
 
-  // Método princiapl
+  // Método principal
   getDataStarWars: async function (request, callback) {
+    console.log("[getDataStarWars]. 1 request:", request);
+    var mapping = "";
+    var fetchedData = null;
 
-    var messageTx = "[getDataStarWars.]";
-    console.log(messageTx, 1, "request:", request);
+    if (!request.resource && !request.id) {
+      fetchedData = await this.getDataSwapiBase()
+      mapping = constant.SWAPI_URL.API_BASE;
 
-    var fetchedData = await this.getModel(request);
-    var mapModelNew = await this.translateListObjectModel(fetchedData, request.resource);
-    return callback(null, mapModelNew);
+    } else if (request.resource) {
+      fetchedData = await this.getDataSwapiByResource(request);
+      mapping = request.resource;
+
+    } else {
+      return callback(null, { tipo: constant.ESTADO_SERVICE_ERROR.TIPO, mensaje: constant.MENSAJE_SERVICE.PARAM_INCORRECTOS, data: null });
+    }
+
+
+    if (fetchedData == null) {
+      return callback(null, { tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO, mensaje: constant.MENSAJE_SERVICE.NOT_FOUND, data: null });
+    }
+    
+
+    var dataTransformed = await this.translateListObjectModel(fetchedData, mapping);
+    return callback(null, { tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO, mensaje: constant.MENSAJE_SERVICE.SUCCESS_LISTA, data: dataTransformed });
+
   },
 
 
   // Obtiene cualquier modelo swapi de acuerdo al request que enviemos
-  getModel: async function (request) {
+  getDataSwapiByResource: async function (request) {
     var obj = [];
     var urlModel = constant.SWAPI_URL.API_BASE;
     switch (request.resource) {
@@ -42,6 +60,19 @@ module.exports = {
       urlModel += constant.CHARACTERS.SLASH + request.id;
     }
     var fetchData = await this.fetchDataSwapi(urlModel);
+
+    obj = JSON.parse(fetchData);
+
+    if (obj && obj["detail"] && (obj["detail"] == "Not found")) {
+      return null;
+    }
+    return obj;
+  },
+
+  // Obtiene data de url base swapi
+  getDataSwapiBase: async function () {
+    var obj = [];
+    var fetchData = await this.fetchDataSwapi(constant.SWAPI_URL.API_BASE);
     obj = JSON.parse(fetchData);
     return obj;
   },
