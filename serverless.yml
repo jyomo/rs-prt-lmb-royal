@@ -24,11 +24,11 @@ package:
 functions:
 
 # 01. servicio de prueba
-  hello:
-    handler: src/DEMO/handler.hello
-    package:
-      include:
-        - 'src/DEMO/**'
+  # hello:
+  #   handler: src/DEMO/handler.hello
+  #   package:
+  #     include:
+  #       - 'src/DEMO/**'
 
 # 02. obtener modelo Swapi
   getDataModelSwapi:
@@ -38,4 +38,38 @@ functions:
     package:
       include:
         - 'src/LMBROY001DATASWAPIGET002/**'
-  
+    events:
+      - http:
+          path: model
+          method: get
+          integration: lambda
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+              - User
+            allowCredentials: false
+          private: true
+          request:
+            passThrough: WHEN_NO_TEMPLATES
+            parameters:
+              querystrings:
+                resource: false
+                id: false
+                search: false
+            template:
+              application/json: |-
+                    #set($inputRoot = $input.path('$'))
+                    {
+                        "resource": "$input.params('resource')",
+                        "id": "$input.params('id')",
+                        "search": "$input.params('search')"
+                    }
+# 03. xxx     
