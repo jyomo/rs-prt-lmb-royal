@@ -11,13 +11,13 @@ module.exports = {
 
     console.log("[getDataTable] -  request: " + request);
     console.log("[getDataTable] -  request: " + request.resource);
-
+    
     var connection = mysql.createConnection({
-      host: "database-2.ctslntac7luo.us-east-1.rds.amazonaws.com",
-      user: "admin",
-      password: "adminadmin",
-      port: 3306,
-      database: "modelbase"
+      host: process.env.host,
+      user: process.env.username,
+      password: process.env.password,
+      port: process.env.port,
+      database: process.env.database
     });
 
     try {
