@@ -6,22 +6,22 @@ module.exports = {
   // Método principal
   async main(payload, callback) {
     let data;
+    data = await validarObject();
+
     // if (serieYMotorInvalido(datoParticular)) {
     //   throw new Error('xxxx');
     // } else return { nombre: datoParticular.etiqueta, valor: datoParticular.valor };
-    await this.promiseES6(payload);
-    await this.timerLoops(payload);
-    await calculateTimePromisePush();
-    await calculateTimePromiseMap();
-    await splitArray();
-    await map2();
-    data = await validarObject();
+    // await this.promiseES6(payload);
+    // await this.timerLoops(payload);
+    // await calculateTimePromisePush();
+    // await calculateTimePromiseMap();
+    // await splitArray();
 
     // console.log('[main]. 2 response:', data);
 
     return callback(null, {
-      tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO,
-      mensaje: constant.MENSAJE_SERVICE.SUCCESS_LISTA,
+      // tipo: constant.ESTADO_SERVICE_SUCCESS.TIPO,
+      // mensaje: constant.MENSAJE_SERVICE.SUCCESS_LISTA,
       data,
     });
   },
