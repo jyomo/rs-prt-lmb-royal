@@ -6,13 +6,23 @@
   "repository": {
     "url": ""
   },
-  "engines": {
-    "node": "~12.14.1"
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.tsx -f codeframe",
+    "local": "lambda-local -l src/LMBROYMAIN002/handlerGet.js -h get -e src/LMBROYMAIN002/test-events/param_test.js -t 10000 --envfile src/LMBROYMAIN002/config/env/test.env"
   },
   "dependencies": {
     "is-null-or-empty": "0.0.1",
     "mysql": "^2.15.0",
+    "node": "^12.13.0",
     "request": "^2.88.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "7.0.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jest": "23.10.0",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
+    "lambda-local": "^1.7.3"
+  }
 }
